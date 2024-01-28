@@ -6,7 +6,8 @@ url='https://github.com/go-musicfox/go-musicfox'
 license=('MIT')
 arch=('x86_64')
 provides=('musicfox')
-makedepends=('go')
+depends=('flac' 'alsa-lib')
+makedepends=('gcc-objc' 'go')
 source=("v${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('34645315fd75095aa3fc9548138efbb7c8cba8c0c33ca1d4f4fc6c6a26806fee')
 build(){
