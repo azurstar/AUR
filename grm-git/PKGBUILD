@@ -7,12 +7,13 @@ url='https://github.com/gphper/grm'
 license=('Apache')
 arch=('x86_64')
 makedepends=('go')
-source=("v${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('7dd4191954dbb6a7160e1dd8c9b5826f3b9118627945fc62fb0267c535db0954')
+source=("grm::git+https://github.com/gphper/grm.git")
+sha256sums=('SKIP')
 build(){
-	cd grm-${pkgver}
+	cd grm
 	export CGO_ENABLED=0
 	go build -o ../grm-bin -ldflags "-s -w" ./main.go
+	rm -rf ../../grm
 }
 
 package() {
@@ -20,7 +21,7 @@ package() {
 	install -d "${pkgdir}/etc/grm"
 	install -d "${pkgdir}/usr/share/licenses/${pkgname}"
 	install -Dm755 "${srcdir}/grm-bin" "${pkgdir}/etc/grm/grm-bin"
-	install -Dm644 "${srcdir}/grm-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}"
+	install -Dm644 "${srcdir}/grm/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}"
 	chmod -R 777 "${pkgdir}/etc/grm"
 	ln -s "/etc/grm/grm-bin" "${pkgdir}/usr/bin/grm-bin"
 }

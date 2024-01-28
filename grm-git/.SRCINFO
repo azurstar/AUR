@@ -6,7 +6,7 @@ pkgbase = grm-git
 	arch = x86_64
 	license = Apache
 	makedepends = go
-	source = v0.1.3.tar.gz::https://github.com/gphper/grm/archive/refs/tags/v0.1.3.tar.gz
-	sha256sums = 7dd4191954dbb6a7160e1dd8c9b5826f3b9118627945fc62fb0267c535db0954
+	source = src/grm::git+https://github.com/gphper/grm.git
+	sha256sums = SKIP
 
 pkgname = grm-git
