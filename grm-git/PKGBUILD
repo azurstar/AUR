@@ -1,0 +1,27 @@
+pkgname=grm-git
+pkgver=0.1.3
+pkgrel=1
+pkgdesc='redis可视化工具（gin+element-plus）【部署简单便捷，SSH连接，用户校验，操作日志、命令行模式、LUA脚本执行、Redis监控等】'
+url='https://github.com/gphper/grm'
+license=('Apache')
+arch=('x86_64')
+provides=('grm')
+makedepends=('gcc-objc' 'go')
+source=("v${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('7dd4191954dbb6a7160e1dd8c9b5826f3b9118627945fc62fb0267c535db0954')
+build(){
+	cd grm-${pkgver}
+	export CGO_ENABLED=0
+	go build -o ../grm -ldflags "-s -w" ./main.go
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -d "${pkgdir}/etc/grm"
+	install -d "${pkgdir}/usr/share/licenses/${pkgname}"
+	install -Dm755 "${srcdir}/grm" "${pkgdir}/etc/grm/grm"
+	install -Dm644 "${srcdir}/grm-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}"
+	chmod -R 777 "${pkgdir}/etc/grm"
+	echo "/etc/grm/grm \$*" >> "${pkgdir}/usr/bin/grm.sh"
+	chmod a+x "${pkgdir}/usr/bin/grm.sh"
+}
