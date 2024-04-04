@@ -6,7 +6,7 @@ url='https://github.com/gphper/grm'
 license=('Apache-2.0')
 arch=('x86_64')
 makedepends=('go')
-source=("grm::git+https://github.com/gphper/grm.git")
+source=("grm::git+${url}.git")
 sha256sums=('SKIP')
 build(){
 	cd grm
